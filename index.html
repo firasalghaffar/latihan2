@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Kalkulator Sederhana</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        .container {
+            width: 300px;
+            margin: 0 auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        select, input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            margin: 5px 0;
+        }
+        button {
+            width: 100%;
+            padding: 10px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Kalkulator Sederhana</h2>
+        <form method="post">
+            <input type="text" name="angka" placeholder="Masukkan angka" required>
+            <select name="operator" required>
+                <option value="+">+</option>
+                <option value="-">-</option>
+                <option value="*">*</option>
+                <option value="/">/</option>
+            </select>
+            <input type="text" name="angka2" placeholder="Masukkan angka kedua" required>
+            <button type="submit" name="hitung">Hitung</button>
+        </form>
+
+        <?php
+        if (isset($_POST['hitung'])) {
+            $angka1 = $_POST['angka'];
+            $angka2 = $_POST['angka2'];
+            $operator = $_POST['operator'];
+            $hasil = 0;
+
+            switch ($operator) {
+                case '+':
+                    $hasil = $angka1 + $angka2;
+                    break;
+                case '-':
+                    $hasil = $angka1 - $angka2;
+                    break;
+                case '*':
+                    $hasil = $angka1 * $angka2;
+                    break;
+                case '/':
+                    if ($angka2 != 0) {
+                        $hasil = $angka1 / $angka2;
+                    } else {
+                        echo "Tidak dapat membagi dengan nol.";
+                    }
+                    break;
+                default:
+                    echo "Operator tidak valid.";
+                    break;
+            }
+
+            echo "Hasil: $angka1 $operator $angka2 = $hasil";
+        }
+        ?>
+    </div>
+</body>
+</html>
